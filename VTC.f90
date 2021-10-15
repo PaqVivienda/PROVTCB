@@ -4,7 +4,7 @@
       ! ----------------------------------------
       ! Programa VTC
       ! Programa para el estudio de viviendas
-      ! t�rmicamente confortables
+      ! termicamente confortables
       ! Proyecto LUZ-FONACIT
       ! Facultad de Ingenieria
       ! Universidad del Zulia
@@ -28,7 +28,7 @@
       REAL(nP) :: timeStep,runTime,Tol,TIMER,div
       
       ! Llama a la subrutina DatosEntrada y lee los nodos y caras
-      ! de la malla, para establecer el tama�o de los arreglos.
+      ! de la malla, para establecer el tamaño de los arreglos.
       ! La subroutina regresa los valores de ni,nj,nk.
       ! Tambien el archivo de salida y regresa los valores
       ! correspondientes a:

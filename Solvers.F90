@@ -44,9 +44,9 @@ MODULE solvers
       ALLOCATE (AA(nodesActTotal))
       CALL getArr4Solve ()
       
-   end subroutine setupSolver
+   END SUBROUTINE setupSolver
    
-   subroutine  makeArr4Solve()
+   SUBROUTINE  makeArr4Solve()
       
       integer              :: i,j,k,l2,m2,n2,node,nodesAct,nVecino
       
@@ -160,9 +160,9 @@ MODULE solvers
          
       END DO
       
-   end subroutine makeArr4Solve
+   END SUBROUTINE makeArr4Solve
    
-   subroutine getArr4Solve ()
+   SUBROUTINE getArr4Solve ()
       
       integer     :: n, nFil, nVecino, nPos
       
@@ -206,7 +206,7 @@ MODULE solvers
          END IF
       END DO
       
-   end subroutine getArr4Solve
+   END SUBROUTINE getArr4Solve
    
    SUBROUTINE solveEq(f)
       

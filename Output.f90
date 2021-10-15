@@ -112,7 +112,7 @@ MODULE OUTPUT
       
    END SUBROUTINE OutScreen
    
-   subroutine writeOutputFiles(u,v,w,T,visc,p,Timer)
+   SUBROUTINE writeOutputFiles(u,v,w,T,visc,p,Timer)
       
       type(arreglo3D), intent(in)	:: u,v,w,T,visc,p
       type(arreglo3D)    		:: f(nfmax)
@@ -168,7 +168,7 @@ MODULE OUTPUT
       
    END SUBROUTINE writeOutputFiles
    
-   subroutine writeMalla()
+   SUBROUTINE writeMalla()
       !Escribe los valores de los nodos en cada direccion en
       !archivo de texto externo
       integer  :: iunit,iend,ibeg,i,jend,jbeg,j,kend,kbeg,k
@@ -215,9 +215,9 @@ MODULE OUTPUT
          WRITE(iunit,12) (objMalla%z(k),k=kbeg,kend)
       END DO
       
-   end subroutine writeMalla
+   END SUBROUTINE writeMalla
    
-   subroutine writeFileArreglos3D(f)
+   SUBROUTINE writeFileArreglos3D(f)
       !Crea el archivo de datos de texto con los valores de todas las
       !variables estudiadas (f(nfmax)), para cada nodo
       
@@ -285,7 +285,7 @@ MODULE OUTPUT
       
       close (iunit)
       
-   end subroutine writeFileArreglos3D
+   END SUBROUTINE writeFileArreglos3D
    
    SUBROUTINE plotFileArreglos(f,timer)
       !Crea el archivo de salida grafico

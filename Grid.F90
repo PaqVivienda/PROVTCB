@@ -98,7 +98,7 @@ SUBROUTINE setGridDimensions()
    
 END SUBROUTINE setGridDimensions
 
-subroutine makeGrid()
+SUBROUTINE makeGrid()
    !Realiza los calculos de la geometria de la malla
    integer     :: i,j,k
    
@@ -196,6 +196,6 @@ subroutine makeGrid()
    
    DEALLOCATE(objMalla%xu,objMalla%yv,objMalla%zw)
    
-end subroutine makeGrid
+END SUBROUTINE makeGrid
 
 end module typeMalla

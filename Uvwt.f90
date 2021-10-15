@@ -881,7 +881,7 @@ MODULE UVWT
       
    END SUBROUTINE getBondaryValuesAndFluxs
    
-   subroutine outflowBC()
+   SUBROUTINE outflowBC()
       
       USE typePrecision
       USE typeMalla
@@ -1021,7 +1021,7 @@ MODULE UVWT
          end do
       end do
       
-   end subroutine outflowBC
+   END SUBROUTINE outflowBC
    
    
 END MODULE UVWT
