@@ -9,7 +9,7 @@ MODULE Propiedades
    
    TYPE(arreglo3D) :: rho,gamX,gamT,visc,Cp,temp1
    
-   contains
+   CONTAINS
    
    SUBROUTINE setProp()
       !Dimensiona las propiedades de acuedo al tama�o de
@@ -35,16 +35,16 @@ MODULE typeBorde
    USE typePrecision
    
    ! Posibilidades para las condiciones de borde de la velocidad
-   integer, parameter 	:: WALL    	= 1
-   integer, parameter 	:: INFLOW  	= 2
-   integer, parameter 	:: OUTFLOW 	= 3
+   INTEGER, parameter 	:: WALL    	= 1
+   INTEGER, parameter 	:: INFLOW  	= 2
+   INTEGER, parameter 	:: OUTFLOW 	= 3
    
-   integer, allocatable	:: bc_I1(:,:)
-   integer, allocatable	:: bc_J1(:,:)
-   integer, allocatable	:: bc_K1(:,:)
-   integer, allocatable	:: bc_L1(:,:)
-   integer, allocatable	:: bc_M1(:,:)
-   integer, allocatable	:: bc_N1(:,:)
+   INTEGER, allocatable	:: bc_I1(:,:)
+   INTEGER, allocatable	:: bc_J1(:,:)
+   INTEGER, allocatable	:: bc_K1(:,:)
+   INTEGER, allocatable	:: bc_L1(:,:)
+   INTEGER, allocatable	:: bc_M1(:,:)
+   INTEGER, allocatable	:: bc_N1(:,:)
    
    !Define los kbc de las condiciones de borde de velocidad
    character(len = 8)   :: kbc_I1, kbc_L1, kbc_J1, kbc_M1, kbc_K1, kbc_N1
@@ -79,7 +79,7 @@ MODULE typeBorde
    
    !TYPE(flujo) :: flux
    
-   contains
+   CONTAINS
    
    !SUBROUTINE setFlux()
    !Dimensiona el flujo para cada variable
@@ -122,152 +122,152 @@ MODULE typeBorde
       
    END SUBROUTINE setBC
    
-   integer function convertBC(bc_index)
+   INTEGER FUNCTION convertBC(bc_index)
    !Convierte el valor de texto en un valor numerico
    character(len = 8), intent(in)	:: bc_index
-   if (bc_index.eq."WALL") then
+   IF (bc_index.eq."WALL") then
       convertBC = WALL
-   else if (bc_index.eq."INFLOW") then
+   else IF (bc_index.eq."INFLOW") then
       convertBC = INFLOW
-   else if (bc_index.eq."OUTFLOW") then
+   else IF (bc_index.eq."OUTFLOW") then
       convertBC = OUTFLOW
-   end if
-end function convertBC
+   END IF
+END FUNCTION convertBC
 
 ! Utilidades para obtener las condiciones de borde en X
-integer function get_BC_I1(j,k,nDir,nf)
-integer, intent (in)	:: j,k,nDir,nf
+INTEGER FUNCTION get_BC_I1(j,k,nDir,nf)
+INTEGER, intent (in)	:: j,k,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_I1 = 1
-   if (bc_I1(j,k).eq.WALL) get_BC_I1 = 2
-   return
+   IF (bc_I1(j,k).eq.WALL) get_BC_I1 = 2
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_I1 = 2
-   if (bc_I1(j,k).eq.WALL) get_BC_I1 = 1
-   return
+   IF (bc_I1(j,k).eq.WALL) get_BC_I1 = 1
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_I1 = 2
-   if (bc_I1(j,k).eq.WALL) get_BC_I1 = 1
-   return
-end select
-end function get_BC_I1
+   IF (bc_I1(j,k).eq.WALL) get_BC_I1 = 1
+   RETURN
+END SELECT
+END FUNCTION get_BC_I1
 
-integer function get_BC_L1(j,k,nDir,nf)
-integer, intent (in)	:: j,k,nDir,nf
+INTEGER FUNCTION get_BC_L1(j,k,nDir,nf)
+INTEGER, intent (in)	:: j,k,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_L1 = 1
-   if (bc_L1(j,k).eq.WALL) get_BC_L1 = 2
-   return
+   IF (bc_L1(j,k).eq.WALL) get_BC_L1 = 2
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_L1 = 2
-   if (bc_L1(j,k).eq.WALL) get_BC_L1 = 1
-   return
+   IF (bc_L1(j,k).eq.WALL) get_BC_L1 = 1
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_L1 = 2
-   if (bc_L1(j,k).eq.WALL) get_BC_L1 = 1
-   return
-end select
-end function get_BC_L1
+   IF (bc_L1(j,k).eq.WALL) get_BC_L1 = 1
+   RETURN
+END SELECT
+END FUNCTION get_BC_L1
 
 
 ! Utilidades para obtener las condiciones de borde en Y
-integer function get_BC_J1(i,k,nDir,nf)
-integer, intent (in)	:: i,k,nDir,nf
+INTEGER FUNCTION get_BC_J1(i,k,nDir,nf)
+INTEGER, intent (in)	:: i,k,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_J1 = 2
-   if (bc_J1(i,k).eq.WALL) get_BC_J1 = 1
-   return
+   IF (bc_J1(i,k).eq.WALL) get_BC_J1 = 1
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_J1 = 1
-   if (bc_J1(i,k).eq.WALL) get_BC_J1 = 2
-   return
+   IF (bc_J1(i,k).eq.WALL) get_BC_J1 = 2
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_J1 = 2
-   if (bc_J1(i,k).eq.WALL) get_BC_J1 = 1
-   return
-end select
-end function get_BC_J1
+   IF (bc_J1(i,k).eq.WALL) get_BC_J1 = 1
+   RETURN
+END SELECT
+END FUNCTION get_BC_J1
 
-integer function get_BC_M1(i,k,nDir,nf)
-integer, intent (in)	:: i,k,nDir,nf
+INTEGER FUNCTION get_BC_M1(i,k,nDir,nf)
+INTEGER, intent (in)	:: i,k,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_M1 = 2
-   if (bc_M1(i,k).eq.WALL) get_BC_M1 = 1
-   return
+   IF (bc_M1(i,k).eq.WALL) get_BC_M1 = 1
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_M1 = 1
-   if (bc_M1(i,k).eq.WALL) get_BC_M1 = 2
-   return
+   IF (bc_M1(i,k).eq.WALL) get_BC_M1 = 2
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_M1 = 2
-   if (bc_M1(i,k).eq.WALL) get_BC_M1 = 1
-   return
-end select
-end function get_BC_M1
+   IF (bc_M1(i,k).eq.WALL) get_BC_M1 = 1
+   RETURN
+END SELECT
+END FUNCTION get_BC_M1
 
 ! Utilidades para obtener las condiciones de borde en Z
-integer function get_BC_K1(i,j,nDir,nf)
-integer, intent (in)	:: i,j,nDir,nf
+INTEGER FUNCTION get_BC_K1(i,j,nDir,nf)
+INTEGER, intent (in)	:: i,j,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_K1 = 2
-   if (bc_K1(i,j).eq.WALL) get_BC_K1 = 1
-   return
+   IF (bc_K1(i,j).eq.WALL) get_BC_K1 = 1
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_K1 = 2
-   if (bc_K1(i,j).eq.WALL) get_BC_K1 = 1
-   return
+   IF (bc_K1(i,j).eq.WALL) get_BC_K1 = 1
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_K1 = 1
-   if (bc_K1(i,j).eq.WALL) get_BC_K1 = 2
-   return
-end select
-end function get_BC_K1
+   IF (bc_K1(i,j).eq.WALL) get_BC_K1 = 2
+   RETURN
+END SELECT
+END FUNCTION get_BC_K1
 
-integer function get_BC_N1(i,j,nDir,nf)
-integer, intent (in)	:: i,j,nDir,nf
+INTEGER FUNCTION get_BC_N1(i,j,nDir,nf)
+INTEGER, intent (in)	:: i,j,nDir,nf
 ! Verifica que variable se est� resolviendo
-select case (nf)
+SELECT CASE (nf)
    ! Velocidad U
-case (1) 
+CASE (1) 
    get_BC_N1 = 2
-   if (bc_N1(i,j).eq.WALL) get_BC_N1 = 1
-   return
+   IF (bc_N1(i,j).eq.WALL) get_BC_N1 = 1
+   RETURN
    ! Velocidad V
-case (2) 
+CASE (2) 
    get_BC_N1 = 2
-   if (bc_N1(i,j).eq.WALL) get_BC_N1 = 1
-   return
+   IF (bc_N1(i,j).eq.WALL) get_BC_N1 = 1
+   RETURN
    ! Velocidad W
-case (3)
+CASE (3)
    get_BC_N1 = 1
-   if (bc_N1(i,j).eq.WALL) get_BC_N1 = 2
-   return
-END select
-end function get_BC_N1
+   IF (bc_N1(i,j).eq.WALL) get_BC_N1 = 2
+   RETURN
+END SELECT
+END FUNCTION get_BC_N1
 
 END MODULE typeBorde

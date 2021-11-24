@@ -765,7 +765,7 @@ MODULE UVWT
                
                ainr = anb * rlx
                
-               if (lcalP) then
+               IF (lcalP) then
                   IF (NF.EQ.1) dup%value(i,j,k)  = 1.0D0/(ap%value(i,j,k)+anb)
                   IF (NF.EQ.2) dvp%value(i,j,k)  = 1.0D0/(ap%value(i,j,k)+anb)
                   IF (NF.EQ.3) dwp%value(i,j,k)  = 1.0D0/(ap%value(i,j,k)+anb)
@@ -773,7 +773,7 @@ MODULE UVWT
                   IF (nf.eq.1) con%value(i,j,k) = con%value(i,j,k) - objMalla%vol(i,j,k)*dpx%value(i,j,k)
                   IF (nf.eq.2) con%value(i,j,k) = con%value(i,j,k) - objMalla%vol(i,j,k)*dpy%value(i,j,k)
                   IF (nf.eq.3) con%value(i,j,k) = con%value(i,j,k) - objMalla%vol(i,j,k)*dpz%value(i,j,k)
-               end if
+               END IF
                
                ap%value(i,j,k)   = ap%value(i,j,k)  + anb + ainr
                
@@ -806,7 +806,7 @@ MODULE UVWT
             IF (kbc%I1(j,k).EQ.2) THEN
                f%value(i,j,k) = (aip%value(i,j,k) * f%value(i+1,j,k) - temp + con%value(i,j,k)) / ap%value(i,j,k)
                !else
-               !if (kbc_I1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i+1,j,k)
+               !IF (kbc_I1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i+1,j,k)
             END IF
             !           flux%I1(j,k,nf) = aip%value(i,j,k) * (f%value(i,j,k)-f%value(i+1,j,k)) + temp
             !            IF (tipo%value(i,j,k).EQ.-1) t%value(i,j,k) = t%value(i+1,j,k)
@@ -816,7 +816,7 @@ MODULE UVWT
             IF (kbc%L1(j,k).EQ.2) THEN
                f%value(i,j,k) = (aim%value(i,j,k) * f%value(i-1,j,k) - temp + con%value(i,j,k)) / ap%value(i,j,k)
                !else
-               !if (kbc_L1.eq."OUTFLOW") T%value(i,j,k) = T%value(i-1,j,k)
+               !IF (kbc_L1.eq."OUTFLOW") T%value(i,j,k) = T%value(i-1,j,k)
             END IF
             !           flux%L1(j,k,nf) = aim%value(i,j,k) * (f%value(i,j,k)-f%value(i-1,j,k)) + temp
             !            IF (tipo%value(i,j,k).EQ.-1) t%value(i,j,k) = t%value(i-1,j,k)
@@ -833,7 +833,7 @@ MODULE UVWT
             IF (kbc%J1(i,k).EQ.2) THEN
                f%value(i,j,k) = (ajp%value(i,j,k) * f%value(i,j+1,k) - temp + con%value(i,j,k)) / ap%value(i,j,k)
                !else
-               !if (kbc_J1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i,j+1,k)
+               !IF (kbc_J1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i,j+1,k)
             END IF
             !           flux%J1(i,k,nf) = ajp%value(i,j,k) * (f%value(i,j,k)-f%value(i,j+1,k)) + temp
             !            IF (tipo%value(i,j,k).EQ.-1) t%value(i,j,k) = t%value(i,j+1,k)
@@ -843,7 +843,7 @@ MODULE UVWT
             IF (kbc%M1(i,k).EQ.2) THEN
                f%value(i,j,k) = (ajm%value(i,j,k) * f%value(i,j-1,k) - temp + con%value(i,j,k)) / ap%value(i,j,k)
                !else
-               !if (kbc_M1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i,j-1,k)
+               !IF (kbc_M1.EQ."OUTFLOW") T%value(i,j,k) = T%value(i,j-1,k)
             END IF
             !           flux%M1(i,k,nf) = ajm%value(i,j,k) * (f%value(i,j,k)-f%value(i,j-1,k)) + temp
             !            IF (tipo%value(i,j,k).EQ.-1) t%value(i,j,k) = t%value(i,j-1,k)
@@ -860,7 +860,7 @@ MODULE UVWT
             IF (kbc%K1(i,j).EQ.2) THEN
                f%value(i,j,k) = (akp%value(i,j,k) * f%value(i,j,k+1) - temp + con%value(i,j,k)) / ap%value(i,j,k)
                !else
-               !if (kbc_K1.eq."OUTFLOW") T%value(i,j,k) = T%value(i,j,k+1)
+               !IF (kbc_K1.eq."OUTFLOW") T%value(i,j,k) = T%value(i,j,k+1)
             END IF
             !            IF (tipo%value(i,j,k).EQ.-1) t%value(i,j,k) = t%value(i,j,k+1)
             
@@ -893,133 +893,133 @@ MODULE UVWT
       ! Corrige el valor de la velocidad en el contorno OUTFLOW
       ! a fin de satisfacer el balance global de masa
       
-      real(nP) :: flowIn, flowOut, factor
+      REAL(nP) :: flowIn, flowOut, factor
       
       factor   = 0.0D0
       flowIn   = 0.0D0
       flowOut  = 0.0D0
       
       ! Plano YZ
-      do j = 2, objMalla%m2
-         do k = 2, objMalla%n2
+      DO j = 2, objMalla%m2
+         DO k = 2, objMalla%n2
             i = 2 	       ! Cara E
-            if (bc_I1(j,k).eq.INFLOW) then
+            IF (bc_I1(j,k).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaX(j,k) * rho%value(i,j,k) * u%value(i-1,j,k)
-            else if (bc_I1(j,k).eq.OUTFLOW) then
+            else IF (bc_I1(j,k).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaX(j,k) * rho%value(i,j,k) * u%value(i,j,k)
-            end if
+            END IF
             i = objMalla%l1  ! Cara W
-            if (bc_L1(j,k).eq.INFLOW) then
+            IF (bc_L1(j,k).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaX(j,k) * rho%value(i-1,j,k) * u%value(i,j,k)
-            else if (bc_L1(j,k).eq.OUTFLOW) then
+            else IF (bc_L1(j,k).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaX(j,k) * rho%value(i-1,j,k) * u%value(i-1,j,k)
-            end if
-         end do
-      end do
+            END IF
+         END DO
+      END DO
       
       !	   ! Plano XZ
-      do i = 2, objMalla%l2
-         do k = 2, objMalla%n2
+      DO i = 2, objMalla%l2
+         DO k = 2, objMalla%n2
             j = 2             ! Cara S
-            if (bc_J1(i,k).eq.INFLOW) then
+            IF (bc_J1(i,k).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaY(i,k) * rho%value(i,j,k) * v%value(i,j-1,k)
-            else if (bc_J1(i,k).eq.OUTFLOW) then
+            else IF (bc_J1(i,k).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaY(i,k) * rho%value(i,j,k) * v%value(i,j,k)
-            end if
+            END IF
             j = objMalla%m1   ! Cara N
-            if (bc_M1(i,k).eq.INFLOW) then
+            IF (bc_M1(i,k).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaY(i,k) * rho%value(i,j-1,k) * v%value(i,j,k)
-            else if (bc_M1(i,k).eq.OUTFLOW) then
+            else IF (bc_M1(i,k).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaY(i,k) * rho%value(i,j-1,k) * v%value(i,j-1,k)
-            end if
-         end do
-      end do
+            END IF
+         END DO
+      END DO
       
       ! Plano XY
-      do i = 2, objMalla%l2
-         do j = 2, objMalla%m2
+      DO i = 2, objMalla%l2
+         DO j = 2, objMalla%m2
             k = 2             ! Cara B
-            if (bc_K1(i,j).eq.INFLOW) then
+            IF (bc_K1(i,j).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaZ(i,j) * rho%value(i,j,k) * w%value(i,j,k-1)
-            else if (bc_K1(i,j).eq.OUTFLOW) then
+            else IF (bc_K1(i,j).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaZ(i,j) * rho%value(i,j,k) * w%value(i,j,k)
-            end if
+            END IF
             k = objMalla%n1   ! Cara T
-            if (bc_N1(i,j).eq.INFLOW) then
+            IF (bc_N1(i,j).eq.INFLOW) then
                flowIn   =  flowIn + objMalla%areaZ(i,j) * rho%value(i,j,k-1) * w%value(i,j,k)
-            else if (bc_N1(i,j).eq.OUTFLOW) then
+            else IF (bc_N1(i,j).eq.OUTFLOW) then
                flowOut  = flowOut + objMalla%areaZ(i,j) * rho%value(i,j,k-1) * w%value(i,j,k-1)
-            end if
-         end do
-      end do
+            END IF
+         END DO
+      END DO
       
       ! Corrige el valor de la velocidad y el flujo de masa a la salida de cada contorno.
       ! La correcci�n es realizada si la condici�n de contorno es igual a OUTPUT
       factor = flowIn / (flowOut+SMALL)
       
       ! Plano YZ
-      do j = 2, objMalla%m2
-         do k = 2, objMalla%n2
+      DO j = 2, objMalla%m2
+         DO k = 2, objMalla%n2
             i = 1
-            if (bc_I1(j,k).eq.OUTFLOW) then
+            IF (bc_I1(j,k).eq.OUTFLOW) then
                u%value(i,j,k)    = u%value(i+1,j,k) * factor
                v%value(i,j,k)    = v%value(i+1,j,k)
                w%value(i,j,k)    = w%value(i+1,j,k)
                F1%value(i,j,k)   = u%value(i,j,k) * objMalla%areaX(j,k) * rho%value(i+1,j,k)
-            end if
+            END IF
             
             i = objMalla%l1
-            if (bc_L1(j,k).eq.OUTFLOW) then
+            IF (bc_L1(j,k).eq.OUTFLOW) then
                u%value(i,j,k)    = u%value(i-1,j,k) * factor
                v%value(i,j,k)    = v%value(i-1,j,k)
                w%value(i,j,k)    = w%value(i-1,j,k)
                F1%value(i-1,j,k) = u%value(i,j,k) * objMalla%areaX(j,k) * rho%value(i-1,j,k)
-            end if
-         end do
-      end do
+            END IF
+         END DO
+      END DO
       
       !Plano XZ
-      do i = 2, objMalla%l2
-         do k = 2, objMalla%n2
+      DO i = 2, objMalla%l2
+         DO k = 2, objMalla%n2
             j = 1
-            if (bc_J1(i,k).eq.OUTFLOW) then
+            IF (bc_J1(i,k).eq.OUTFLOW) then
                u%value(i,j,k)    = u%value(i,j+1,k)
                v%value(i,j,k)    = v%value(i,j+1,k) * factor
                w%value(i,j,k)    = w%value(i,j+1,k)
                F2%value(i,j,k)   = v%value(i,j,k) * objMalla%areaY(i,k) * rho%value(i,j+1,k)
-            end if
+            END IF
             
             j = objMalla%m1
-            if (bc_M1(i,k).eq.OUTFLOW) then
+            IF (bc_M1(i,k).eq.OUTFLOW) then
                u%value(i,j,k)    = u%value(i,j-1,k)
                v%value(i,j,k)    = v%value(i,j-1,k) * factor
                w%value(i,j,k)    = w%value(i,j-1,k)
                F2%value(i,j-1,k) = v%value(i,j,k) * objMalla%areaY(i,k) * rho%value(i,j-1,k)
-            end if
+            END IF
             
-         end do
-      end do
+         END DO
+      END DO
       
       ! Plano XY
-      do i = 2, objMalla%l2
-         do j = 2, objMalla%m2
+      DO i = 2, objMalla%l2
+         DO j = 2, objMalla%m2
             k = 1
-            if (bc_K1(i,j).eq.OUTFLOW) then
+            IF (bc_K1(i,j).eq.OUTFLOW) then
                u%value(i,j,k)    = u%value(i,j,k+1)
                v%value(i,j,k)    = v%value(i,j,k+1)
                w%value(i,j,k)    = w%value(i,j,k+1) * factor
                F3%value(i,j,k)   = w%value(i,j,k) * objMalla%areaZ(i,j) * rho%value(i,j,k+1)
-            end if
+            END IF
             
             k = objMalla%n1
-            if (bc_N1(i,j).eq.OUTFLOW) then
+            IF (bc_N1(i,j).eq.OUTFLOW) then
                u%value(i,j,k) 	= u%value(i,j,k-1)
                v%value(i,j,k) 	= v%value(i,j,k-1)
                w%value(i,j,k) 	= w%value(i,j,k-1) * factor
                F3%value(i,j,k-1) = w%value(i,j,k) * objMalla%areaZ(i,j) * rho%value(i,j,k-1)
-            end if
-         end do
-      end do
+            END IF
+         END DO
+      END DO
       
    END SUBROUTINE outflowBC
    

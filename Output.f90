@@ -10,7 +10,7 @@ MODULE OUTPUT
    
    CHARACTER (LEN = 120) :: plotf1,nomArchivo1
    
-   contains
+   CONTAINS
    
    SUBROUTINE OutScreen(iter,numTimeStep,timer)
       !Subrutina para la salida de datos por pantalla
@@ -138,15 +138,15 @@ MODULE OUTPUT
       
       !Vuelve a colocar los espacios en blanco en el nombre de los archivos
       DO aa=1,LEN_TRIM(nomArchivo1)
-         if (nomArchivo1(aa:aa).eq."*") then
+         IF (nomArchivo1(aa:aa).eq."*") then
             nomArchivo1(aa:aa) = ""
-         end if
+         END IF
       END DO
       
       DO aa=1,LEN_TRIM(plotf1)
-         if (plotf1(aa:aa).eq."*") then
+         IF (plotf1(aa:aa).eq."*") then
             plotf1(aa:aa) = ""
-         end if
+         END IF
       END DO
       
       ! Copia los valores de las variables a imprimir
@@ -171,7 +171,7 @@ MODULE OUTPUT
    SUBROUTINE writeMalla()
       !Escribe los valores de los nodos en cada direccion en
       !archivo de texto externo
-      integer  :: iunit,iend,ibeg,i,jend,jbeg,j,kend,kbeg,k
+      INTEGER  :: iunit,iend,ibeg,i,jend,jbeg,j,kend,kbeg,k
       
       iunit = 10
       
@@ -222,7 +222,7 @@ MODULE OUTPUT
       !variables estudiadas (f(nfmax)), para cada nodo
       
       type(arreglo3D), intent(in)   :: f(nfmax)
-      integer                       :: i,j,k,nf,iunit,ibeg,iend
+      INTEGER                       :: i,j,k,nf,iunit,ibeg,iend
       
       iunit = 10
       
@@ -235,20 +235,20 @@ MODULE OUTPUT
       20 format(/'  k =',i6)
       22 format(1x,20a,1x,20(1h-))
       
-      do nf=1,nfmax
+      DO nf=1,nfmax
          
          write (iunit,14) f(nf)%title
          
-         do k = 1,nk
+         DO k = 1,nk
             
             ibeg = 1
             iend = ibeg + 6
             
             write(iunit,20) k
             
-            if (ni.gt.iend) then
+            IF (ni.gt.iend) then
                
-               do while (iend.ne.ni)
+               DO while (iend.ne.ni)
                   
                   iend = ibeg + 6
                   iend = min(iend,ni)
@@ -256,13 +256,13 @@ MODULE OUTPUT
                   write(iunit,16) (i,i=ibeg,iend)
                   write(iunit,*) ' j ='
                   
-                  do j=nj,1,-1
+                  DO j=nj,1,-1
                      write(iunit,18) j,(f(nf)%value(i,j,k),i=ibeg,iend)
-                  end do
+                  END DO
                   
                   ibeg = iend + 1
                   
-               end do
+               END DO
                
             else
                
@@ -272,16 +272,16 @@ MODULE OUTPUT
                write(iunit,16) (i,i=ibeg,iend)
                write(iunit,*) ' j ='
                
-               do j=nj,1,-1
+               DO j=nj,1,-1
                   write(iunit,18) j,(f(nf)%value(i,j,k),i=ibeg,iend)
-               end do
+               END DO
                
                ibeg = iend + 1
                
-            end if
+            END IF
             
-         end do
-      end do
+         END DO
+      END DO
       
       close (iunit)
       

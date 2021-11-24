@@ -5,8 +5,8 @@ MODULE typePrecision
    !(4 u 8 bits), tambien un valor infinitesimal para evitar la
    !divisi�n entre cero en algunos casos. Y el numero maximo de
    !variables dependientes a calcular.
-   integer, parameter   :: nP = 8
-   real(nP), parameter  :: SMALL = 1.0D-20
+   INTEGER, parameter   :: nP = 8
+   REAL(nP), parameter  :: SMALL = 1.0D-20
    INTEGER, parameter   :: nfmax = 6
    CHARACTER(LEN = 200)  :: nomArchivo="VTCout"      !Especifica el nombre del archivo de texto
 END MODULE typePrecision
@@ -35,13 +35,13 @@ MODULE typeMalla
    !las cuales guardan una relacion entre si.
    TYPE(malla)     :: objMalla
    
-   contains
+   CONTAINS
    
-   real(nP) function InterLin(varP,varE,n,iCoord)
+   REAL(nP) FUNCTION InterLin(varP,varE,n,iCoord)
    !Funcion de interpolacion lineal
-   use typePrecision
-   integer     :: n,iCoord
-   real(nP)    :: varP,varE,wm,wp
+   USE typePrecision
+   INTEGER     :: n,iCoord
+   REAL(nP)    :: varP,varE,wm,wp
    intent(in)  :: varP,varE,n,iCoord
    
    !phie = phiE * wm + phiP * wp
@@ -53,22 +53,22 @@ MODULE typeMalla
    wm = 0.0D0 !(minus)
    wp = 0.0D0 !(plus)
    
-   select case (iCoord)
-   case (1)
+   SELECT CASE (iCoord)
+   CASE (1)
       wm = objMalla%fx(n+1)
       wp = objMalla%fxm(n+1)
-   case (2)
+   CASE (2)
       wm = objMalla%fy(n+1)
       wp = objMalla%fym(n+1)
-   case (3)
+   CASE (3)
       wm = objMalla%fz(n+1)
       wp = objMalla%fzm(n+1)
-   end select
+   END SELECT
    
-   if (wm+wp.lt.1.0D0) WRITE (*,*) 'ERROR'
+   IF (wm+wp.lt.1.0D0) WRITE (*,*) 'ERROR'
    InterLin = varE * wm + varP * wp
-   return
-end function InterLin
+   RETURN
+END FUNCTION InterLin
 
 REAL(8) FUNCTION InterArmonica(gamm,gamp,dxm,dxp)
 USE typePrecision
@@ -77,7 +77,7 @@ REAL(nP) :: dxm,dxp
 
 InterArmonica = 2.0D0*gamm*gamp/(dxm*gamp+dxp*gamm+SMALL)        !Intepolacion media armonica
 !InterArmonica = gamm*gamp*(dxm + dxp)/(dxm*gamp+dxp*gamm+SMALL)   !Interpolacion armonica
-END function InterArmonica
+END FUNCTION InterArmonica
 
 SUBROUTINE setGridDimensions()
    !Dimensiona las variables gemotrica de la malla
@@ -100,7 +100,7 @@ END SUBROUTINE setGridDimensions
 
 SUBROUTINE makeGrid()
    !Realiza los calculos de la geometria de la malla
-   integer     :: i,j,k
+   INTEGER     :: i,j,k
    
    !Establece el n�mero de volumenes de control
    objMalla%ncvx = ni-2
@@ -192,10 +192,10 @@ SUBROUTINE makeGrid()
       objMalla%fz(k)  = 1.0D0-objMalla%fzm(k)
    END DO
    
-   !return
+   !RETURN
    
    DEALLOCATE(objMalla%xu,objMalla%yv,objMalla%zw)
    
 END SUBROUTINE makeGrid
 
-end module typeMalla
+END MODULE typeMalla

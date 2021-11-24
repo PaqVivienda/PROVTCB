@@ -29,7 +29,7 @@ MODULE Coeficientes
 	
 	TYPE(arreglo3D) :: ap,aip,aim,ajp,ajm,akp,akm,con
 	
-	contains
+	CONTAINS
 	
 	SUBROUTINE setCoef()
 		!Dimensiona todos los coeficientes
@@ -77,32 +77,32 @@ MODULE Coeficientes
 		ap%value  = 0.0D0
 		con%value = 0.0D0
 		
-		do i = 1, ni, ni-1
+		DO i = 1, ni, ni-1
 			aip%value(i,:,:) = 0.0D0
 			aim%value(i,:,:) = 0.0D0
 			ajp%value(i,:,:) = 0.0D0
 			ajm%value(i,:,:) = 0.0D0
 			akp%value(i,:,:) = 0.0D0
 			akm%value(i,:,:) = 0.0D0
-		end do
+		END DO
 		
-		do j = 1, nj, nj-1
+		DO j = 1, nj, nj-1
 			aip%value(:,j,:) = 0.0D0
 			aim%value(:,j,:) = 0.0D0
 			ajp%value(:,j,:) = 0.0D0
 			ajm%value(:,j,:) = 0.0D0
 			akp%value(:,j,:) = 0.0D0
 			akm%value(:,j,:) = 0.0D0
-		end do
+		END DO
 		
-		do k = 1, nk, nk-1
+		DO k = 1, nk, nk-1
 			aip%value(:,:,k) = 0.0D0
 			aim%value(:,:,k) = 0.0D0
 			ajp%value(:,:,k) = 0.0D0
 			ajm%value(:,:,k) = 0.0D0
 			akp%value(:,:,k) = 0.0D0
 			akm%value(:,:,k) = 0.0D0
-		end do
+		END DO
 		
 	END SUBROUTINE initCoefBordes
 	

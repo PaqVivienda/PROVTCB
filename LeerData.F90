@@ -29,7 +29,7 @@ MODULE LeerData
       USE typeMalla
       
       CHARACTER(LEN = 120)  :: TEMP,nomDatos
-      integer :: aa
+      INTEGER :: aa
       
       ! RUNOPTIONS
       INTEGER              :: numIter           !Numero de iteraciones por paso de
@@ -54,24 +54,24 @@ MODULE LeerData
       READ (1,5) nomRad                !Propiedades (Densidad, Cp, K) y datos de radiacion
       READ (1,*) temp
       !En caso de que se lea un archivo de una corrida previa
-      if (temp.eq."s") then
+      IF (temp.eq."s") then
          DatPrev = .True.
-      end if
-      if (DatPrev) READ (1,5) nomPrev  !Lee el nombre del archivo de salida a ser leido
+      END IF
+      IF (DatPrev) READ (1,5) nomPrev  !Lee el nombre del archivo de salida a ser leido
       !posteriormente
       CLOSE(1)
       
       !Determina el nombre del directorio donde se encuentran
       !los archivos de entrada
       aa = 0
-      do i = LEN_TRIM(NomDatos),0,-1
-         if (aa.eq.0) then
+      DO i = LEN_TRIM(NomDatos),0,-1
+         IF (aa.eq.0) then
             IF (nomDatos(i:i).eq."\") then
                DIR = nomDatos(1:i)
                aa = 1
             END IF
-         end if
-      end do
+         END IF
+      END DO
       
       !Lectura de los datos iniciales de la simulacion
       OPEN (UNIT = 1, FILE = nomDatos)
@@ -139,11 +139,11 @@ MODULE LeerData
       
       !Si el directorio tiene espacios en blanco, se cambian
       !temporalmente por *, para evitar errores en la corrida
-      do aa=1,LEN_TRIM(DIR)
-         if (DIR(aa:aa).eq."") then
+      DO aa=1,LEN_TRIM(DIR)
+         IF (DIR(aa:aa).eq."") then
             dir(aa:aa)="*"
-         end if
-      end do
+         END IF
+      END DO
       
    END SUBROUTINE DatosEntrada
    

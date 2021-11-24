@@ -21,12 +21,12 @@ MODULE solvers
    
    TYPE(coordLoc),   POINTER  :: getCoord(:)
    TYPE(nodeLoc),    POINTER  :: getNode(:,:,:)
-   integer, ALLOCATABLE       :: JA(:),IA(:)
-   real(nP), POINTER          :: AA(:)
+   INTEGER, ALLOCATABLE       :: JA(:),IA(:)
+   REAL(nP), POINTER          :: AA(:)
    
    INTEGER :: numNodes,nodesActTotal
    
-   contains
+   CONTAINS
    
    SUBROUTINE setupSolver()
       
@@ -48,7 +48,7 @@ MODULE solvers
    
    SUBROUTINE  makeArr4Solve()
       
-      integer              :: i,j,k,l2,m2,n2,node,nodesAct,nVecino
+      INTEGER              :: i,j,k,l2,m2,n2,node,nodesAct,nVecino
       
       numNodes = (ni-2)*(nj-2)*(nk-2)
       
@@ -164,7 +164,7 @@ MODULE solvers
    
    SUBROUTINE getArr4Solve ()
       
-      integer     :: n, nFil, nVecino, nPos
+      INTEGER     :: n, nFil, nVecino, nPos
       
       ! Establece el tama�o de los arreglos JA & IA
       n = 0
@@ -759,12 +759,12 @@ MODULE solvers
       
       !Arreglos necesarios para el MULTIGRID
       
-      integer, allocatable 	:: JJA(:)
-      integer, allocatable 	:: IIA(:)
-      real(nP), allocatable	:: UU(:)
-      real(nP), allocatable	:: AAA(:)
-      real(nP), allocatable	:: FF(:)
-      real(nP), allocatable	:: IG(:)
+      INTEGER, allocatable 	:: JJA(:)
+      INTEGER, allocatable 	:: IIA(:)
+      REAL(nP), allocatable	:: UU(:)
+      REAL(nP), allocatable	:: AAA(:)
+      REAL(nP), allocatable	:: FF(:)
+      REAL(nP), allocatable	:: IG(:)
       
       level = 0
       idgts = 0
@@ -851,7 +851,7 @@ MODULE solvers
          ISWTCH,IOUT,IPRINT,LEVELX,IFIRST,NCYC,EPS,MADAPT,NRD,NSOLCO,NRU,&
          ECG1,ECG2,EWT2,NWT,NTR,IERR)
          
-      case (4)
+      CASE (4)
          
          NW = 2*N!+ITMAX*4
          allocate(WKSP(NW))
@@ -885,5 +885,5 @@ MODULE solvers
       
    END SUBROUTINE setEnviroment
    
-end module solvers
+END MODULE solvers
 

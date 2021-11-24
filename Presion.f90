@@ -14,7 +14,7 @@ MODULE PRESION
    TYPE(arreglo3D) :: pp,p,dpx,dpy,dpz,dup,dvp,dwp
    TYPE(arreglo3D) :: F1,F2,F3
    
-   contains
+   CONTAINS
    
    SUBROUTINE setPresion()
       !Dimensiona y nombra todos los arreglos utilizados
@@ -62,7 +62,7 @@ MODULE PRESION
       F2%value(:,:,:) = 0.0D0
       F3%value(:,:,:) = 0.0D0
       
-      if (DatPrev) then
+      IF (DatPrev) then
          DO i = 1,objMalla%l1
             DO j = 1,objMalla%m1
                DO k = 1,objMalla%n1
@@ -72,7 +72,7 @@ MODULE PRESION
                END DO
             END DO
          END DO
-      end if
+      END IF
       
       DEALLOCATE(temp1%value)
       
@@ -86,10 +86,10 @@ MODULE PRESION
       USE typeBorde
       USE LeerData
       
-      integer  :: i,j,k,indiceDir
-      real(nP) :: rhoFace, dpf, upro, dpxel, uface, dpxe
-      real(nP) :: vol
-      real(nP) :: PPE,PPW,PPN,PPS,PPT,PPB
+      INTEGER  :: i,j,k,indiceDir
+      REAL(nP) :: rhoFace, dpf, upro, dpxel, uface, dpxe
+      REAL(nP) :: vol
+      REAL(nP) :: PPE,PPW,PPN,PPS,PPT,PPB
       
       TYPE (arreglo3D) :: u,v,w
       
@@ -133,7 +133,7 @@ MODULE PRESION
                            uface = upro - vol * dpf * (dpxe - dpxel)
                         else
                            uface = 0.0D0
-                        END if
+                        END IF
                         
                         !Correcci�n del flujo m�sico
                         F1%value(i,j,k)    = rhoface * objMalla%areaX(j,k) * uface
@@ -171,7 +171,7 @@ MODULE PRESION
                            uface = upro - vol * dpf * (dpxe - dpxel)
                         else
                            uface = 0.0D0
-                        END if
+                        END IF
                         
                         !Correcci�n del flujo m�sico
                         F2%value(i,j,k) = rhoface * objMalla%areaY(i,k) * uface
@@ -271,13 +271,13 @@ MODULE PRESION
                
                ! Actualiza los flujo en las caras
                ! Flujo en la direcci�n X!
-               if (i.lt.objMalla%l2) F1%value(i,j,k) = F1%value(i,j,k) - aip%value(i,j,k) &
+               IF (i.lt.objMalla%l2) F1%value(i,j,k) = F1%value(i,j,k) - aip%value(i,j,k) &
                * (pp%value(i+1,j,k) - pp%value(i,j,k))
                ! Flujo en la direcci�n Y!
-               if (j.lt.objMalla%m2) F2%value(i,j,k) = F2%value(i,j,k) - ajp%value(i,j,k) &
+               IF (j.lt.objMalla%m2) F2%value(i,j,k) = F2%value(i,j,k) - ajp%value(i,j,k) &
                * (pp%value(i,j+1,k) - pp%value(i,j,k))
                ! Flujo en la direcci�n Z!
-               if (k.lt.objMalla%n2) F3%value(i,j,k) = F3%value(i,j,k) - akp%value(i,j,k) &
+               IF (k.lt.objMalla%n2) F3%value(i,j,k) = F3%value(i,j,k) - akp%value(i,j,k) &
                * (pp%value(i,j,k+1) - pp%value(i,j,k))
                
                ! Correcion de velocidades
@@ -329,83 +329,83 @@ MODULE PRESION
       ! Direcci�n X:
       nDir  = 1
       nf    = 1
-      do j = 2,objMalla%m2
-         do k = 2,objMalla%n2
+      DO j = 2,objMalla%m2
+         DO k = 2,objMalla%n2
             
-            if (get_BC_I1(j,k,nDir,nf).eq.WALL) then
+            IF (get_BC_I1(j,k,nDir,nf).eq.WALL) then
                wijk = objMalla%fx(3)
             else
                wijk = 0.0D0
-            end if
+            END IF
             
             i = 2
             p%value(1,j,k)    = p%value(i,j,k) + (p%value(i,j,k)-p%value(i+1,j,k)) * wijk
             
-            if (get_BC_L1(j,k,nDir,nf).eq.WALL) then
+            IF (get_BC_L1(j,k,nDir,nf).eq.WALL) then
                wlmn = objMalla%fxm(objMalla%l2)
             else
                wlmn = 0.0D0
-            end if
+            END IF
             
             i = objMalla%l2
             p%value(objMalla%l1,j,k)   = p%value(i,j,k) + (p%value(i,j,k)-p%value(i-1,j,k)) * wlmn
             
-         end do
-      end do
+         END DO
+      END DO
       
       ! Direcci�n Y:
       nDir  = 2
       nf    = 2
-      do i = 2,objMalla%l2
-         do k = 2,objMalla%n2
+      DO i = 2,objMalla%l2
+         DO k = 2,objMalla%n2
             
-            if (get_BC_J1(i,k,nDir,nf).eq.WALL) then
+            IF (get_BC_J1(i,k,nDir,nf).eq.WALL) then
                wIJK = objMalla%fy(3)
             else
                wIJK = 0.0D0
-            end if
+            END IF
             
             j = 2
             p%value(i,1,k)    = p%value(i,j,k) + (p%value(i,j,k)-p%value(i,j+1,k)) * wIJK
             
-            if (get_BC_M1(i,k,nDir,nf).eq.WALL) then
+            IF (get_BC_M1(i,k,nDir,nf).eq.WALL) then
                wLMN = objMalla%fym(objMalla%m2)
             else
                wLMN = 0.0D0
-            end if
+            END IF
             
             j = objMalla%m2
             p%value(i,objMalla%m1,k)   = p%value(i,j,k) + (p%value(i,j,k)-p%value(i,j-1,k)) * wLMN
             
-         end do
-      end do
+         END DO
+      END DO
       
       ! direcci�n Z:
       nDir  = 3
       nf    = 3
-      do i = 2,objMalla%l2
-         do j = 2,objMalla%m2
+      DO i = 2,objMalla%l2
+         DO j = 2,objMalla%m2
             
-            if (get_BC_K1(i,j,nDir,nf).eq.WALL) then
+            IF (get_BC_K1(i,j,nDir,nf).eq.WALL) then
                wijk = objMalla%fz(3)
             else
                wijk = 0.0D0
-            end if
+            END IF
             
             k = 2
             p%value(i,j,1)    = p%value(i,j,k) + (p%value(i,j,k)-p%value(i,j,k+1)) * wijk
             
-            if (get_BC_N1(i,j,nDir,nf).eq.WALL) then
+            IF (get_BC_N1(i,j,nDir,nf).eq.WALL) then
                wlmn = objMalla%fzm(objMalla%n2)
             else
                wlmn = 0.0D0
-            end if
+            END IF
             
             k = objMalla%n2
             p%value(i,j,objMalla%n1)   = p%value(i,j,k) + (p%value(i,j,k)-p%value(i,j,k-1)) * wlmn
             
-         end do
-      end do
+         END DO
+      END DO
       
    END SUBROUTINE pbound
    
@@ -491,8 +491,8 @@ MODULE PRESION
    SUBROUTINE SetEdgesValues(f)
       ! Extrapola el valor de las variables en las esquinas del domino
       
-      real(nP)                      	 :: tmp
-      integer                       	 :: i,j,k
+      REAL(nP)                      	 :: tmp
+      INTEGER                       	 :: i,j,k
       type(arreglo3D), intent(in out) :: f
       
       tmp = 0.5D0

@@ -47,7 +47,7 @@ MODULE adapt
    !Aire
    REAL(nP)          :: Area1, Area2, V1, V2
    LOGICAL           :: Aire
-   contains
+   CONTAINS
    
    SUBROUTINE begin(u,v,w,t,TIMER)
       
@@ -198,9 +198,9 @@ MODULE adapt
       !DO b=1,nj
       !DO c=1,nk
       
-      !   if (tipo%value(a,b,c).eq.0) then
+      !   IF (tipo%value(a,b,c).eq.0) then
       !      VolT = VolT + objmalla%vol(a,b,c)
-      !   end if
+      !   END IF
       
       !END DO
       !END DO
@@ -274,7 +274,7 @@ MODULE adapt
       !Lectura de datos previos obtenidos de corridas anteriores
       !Se leen los valores de u,v,w, presion y temperatura, desde un
       !archivo de resultados obtenido en una corrida previa
-      if (DatPrev) then
+      IF (DatPrev) then
          
          OPEN (UNIT=15,FILE= nomPrev)
          
@@ -306,7 +306,7 @@ MODULE adapt
          READ (15,*) TIMER
          CLOSE (15)
          
-      END if
+      END IF
       
       DEALLOCATE (Cp%value)
       
